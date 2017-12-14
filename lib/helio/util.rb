@@ -4,9 +4,9 @@ module Helio
   module Util
     # Options that a user is allowed to specify.
     OPTS_USER_SPECIFIED = Set[
-      :api_key,
+      :api_id,
+      :api_token,
       :idempotency_key,
-      :helio_account,
       :helio_version
     ].freeze
 
@@ -43,47 +43,8 @@ module Helio
         ListObject::OBJECT_NAME => ListObject,
 
         # business objects
-        Account::OBJECT_NAME              => Account,
-        AlipayAccount::OBJECT_NAME        => AlipayAccount,
-        ApplePayDomain::OBJECT_NAME       => ApplePayDomain,
-        ApplicationFee::OBJECT_NAME       => ApplicationFee,
-        ApplicationFeeRefund::OBJECT_NAME => ApplicationFeeRefund,
-        Balance::OBJECT_NAME              => Balance,
-        BalanceTransaction::OBJECT_NAME   => BalanceTransaction,
-        BankAccount::OBJECT_NAME          => BankAccount,
-        BitcoinReceiver::OBJECT_NAME      => BitcoinReceiver,
-        BitcoinTransaction::OBJECT_NAME   => BitcoinTransaction,
-        Card::OBJECT_NAME                 => Card,
-        Charge::OBJECT_NAME               => Charge,
-        CountrySpec::OBJECT_NAME          => CountrySpec,
-        Coupon::OBJECT_NAME               => Coupon,
-        Customer::OBJECT_NAME             => Customer,
-        Dispute::OBJECT_NAME              => Dispute,
-        EphemeralKey::OBJECT_NAME         => EphemeralKey,
-        Event::OBJECT_NAME                => Event,
-        ExchangeRate::OBJECT_NAME         => ExchangeRate,
-        FileUpload::OBJECT_NAME           => FileUpload,
-        Invoice::OBJECT_NAME              => Invoice,
-        InvoiceItem::OBJECT_NAME          => InvoiceItem,
-        InvoiceLineItem::OBJECT_NAME      => InvoiceLineItem,
-        LoginLink::OBJECT_NAME            => LoginLink,
-        Order::OBJECT_NAME                => Order,
-        OrderReturn::OBJECT_NAME          => OrderReturn,
-        Payout::OBJECT_NAME               => Payout,
-        Plan::OBJECT_NAME                 => Plan,
-        Product::OBJECT_NAME              => Product,
-        Recipient::OBJECT_NAME            => Recipient,
-        RecipientTransfer::OBJECT_NAME    => RecipientTransfer,
-        Refund::OBJECT_NAME               => Refund,
-        Reversal::OBJECT_NAME             => Reversal,
-        SKU::OBJECT_NAME                  => SKU,
-        Source::OBJECT_NAME               => Source,
-        SourceTransaction::OBJECT_NAME    => SourceTransaction,
-        Subscription::OBJECT_NAME         => Subscription,
-        SubscriptionItem::OBJECT_NAME     => SubscriptionItem,
-        ThreeDSecure::OBJECT_NAME         => ThreeDSecure,
-        Token::OBJECT_NAME                => Token,
-        Transfer::OBJECT_NAME             => Transfer,
+        CustomerList::OBJECT_NAME         => CustomerList,
+        Participant::OBJECT_NAME          => Participant,
       }
     end
 
@@ -246,13 +207,13 @@ module Helio
     end
 
     # The secondary opts argument can either be a string or hash
-    # Turn this value into an api_key and a set of headers
+    # Turn this value into an api_token and a set of headers
     def self.normalize_opts(opts)
       case opts
       when String
-        { api_key: opts }
+        { api_token: opts }
       when Hash
-        check_api_key!(opts.fetch(:api_key)) if opts.key?(:api_key)
+        check_api_token!(opts.fetch(:api_token)) if opts.key?(:api_token)
         opts.clone
       else
         raise TypeError, "normalize_opts expects a string or a hash"
@@ -264,8 +225,8 @@ module Helio
       key
     end
 
-    def self.check_api_key!(key)
-      raise TypeError, "api_key must be a string" unless key.is_a?(String)
+    def self.check_api_token!(key)
+      raise TypeError, "api_token must be a string" unless key.is_a?(String)
       key
     end
 
@@ -289,8 +250,8 @@ module Helio
     # Generates a Dashboard link to inspect a request ID based off of a request
     # ID value and an API key, which is used to attempt to extract whether the
     # environment is livemode or testmode.
-    def self.request_id_dashboard_url(request_id, api_key)
-      env = !api_key.nil? && api_key.start_with?("sk_live") ? "live" : "test"
+    def self.request_id_dashboard_url(request_id, api_token)
+      env = !api_token.nil? && api_token.start_with?("sk_live") ? "live" : "test"
       "https://helio.zurb.com/#{env}/logs/#{request_id}"
     end
 

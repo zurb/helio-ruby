@@ -13,7 +13,7 @@ module Helio
         # * +opts+ - A Hash of additional options (separate from the params /
         #   object values) to be added to the request. E.g. to allow for an
         #   idempotency_key to be passed in the request headers, or for the
-        #   api_key to be overwritten. See {APIOperations::Request.request}.
+        #   api_token to be overwritten. See {APIOperations::Request.request}.
         def update(id, params = {}, opts = {})
           params.each_key do |k|
             if protected_fields.include?(k)
@@ -41,7 +41,7 @@ module Helio
       # * +opts+ - A Hash of additional options (separate from the params /
       #   object values) to be added to the request. E.g. to allow for an
       #   idempotency_key to be passed in the request headers, or for the
-      #   api_key to be overwritten. See {APIOperations::Request.request}.
+      #   api_token to be overwritten. See {APIOperations::Request.request}.
       def save(params = {}, opts = {})
         # We started unintentionally (sort of) allowing attributes sent to
         # +save+ to override values used during the update. So as not to break

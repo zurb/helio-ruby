@@ -110,12 +110,13 @@ module Helio
     end
 
     def execute_request(method, path,
-                        api_base: nil, api_key: nil, headers: {}, params: {})
+                        api_base: nil, api_id: nil, api_token: nil, headers: {}, params: {})
 
       api_base ||= Helio.api_base
-      api_key ||= Helio.api_key
+      api_id ||= Helio.api_id
+      api_token ||= Helio.api_token
 
-      check_api_key!(api_key)
+      check_api_token!(api_token)
 
       params = Util.objects_to_ids(params)
       url = api_url(path, api_base)
@@ -134,13 +135,13 @@ module Helio
                end
       end
 
-      headers = request_headers(api_key, method)
+      headers = request_headers(api_token, method)
                 .update(Util.normalize_headers(headers))
 
       # stores information on the request we're about to make so that we don't
       # have to pass as many parameters around for logging.
       context = RequestLogContext.new
-      context.account         = headers["X-API-TOKEN"]
+      context.api_id         = headers["X-API-ID"]
       context.api_token       = api_token
       context.api_version     = headers["Helio-Version"]
       context.body            = body
@@ -165,7 +166,7 @@ module Helio
 
       # Allows HelioClient#request to return a response object to a caller.
       @last_response = resp
-      [resp, api_key]
+      [resp, api_token]
     end
 
     private
@@ -174,16 +175,16 @@ module Helio
       (api_base || Helio.api_base) + url
     end
 
-    def check_api_key!(api_key)
-      unless api_key
+    def check_api_token!(api_token)
+      unless api_token
         raise AuthenticationError, "No API key provided. " \
-          'Set your API key using "Helio.api_key = <API-KEY>". ' \
+          'Set your API key using "Helio.api_token = <API-TOKEN>". ' \
           "You can generate API keys from the Helio web interface. " \
           "See https://helio.zurb.com for details, or email helio@zurb.com " \
           "if you have any questions."
       end
 
-      return unless api_key =~ /\s/
+      return unless api_token =~ /\s/
 
       raise AuthenticationError, "Your API key is invalid, as it contains " \
         "whitespace. (HINT: You can double-check your API key from the " \
@@ -355,7 +356,7 @@ module Helio
       raise APIConnectionError, message + "\n\n(Network error: #{e.message})"
     end
 
-    def request_headers(api_key, method)
+    def request_headers(api_token, method)
       user_agent = "Helio/v1 RubyBindings/#{Helio::VERSION}"
       unless Helio.app_info.nil?
         user_agent += " " + format_app_info(Helio.app_info)
@@ -363,7 +364,7 @@ module Helio
 
       headers = {
         "User-Agent" => user_agent,
-        "Authorization" => "Bearer #{api_key}",
+        "Authorization" => "Bearer #{api_token}",
         "Content-Type" => "application/x-www-form-urlencoded",
       }
 
@@ -393,7 +394,7 @@ module Helio
 
     def log_request(context, num_retries)
       Util.log_info("Request to Helio API",
-                    account: context.account,
+                    api_id: context.api_id,
                     api_version: context.api_version,
                     idempotency_key: context.idempotency_key,
                     method: context.method,
@@ -408,7 +409,7 @@ module Helio
 
     def log_response(context, request_start, status, body)
       Util.log_info("Response from Helio API",
-                    account: context.account,
+                    api_id: context.api_id,
                     api_version: context.api_version,
                     elapsed: Time.now - request_start,
                     idempotency_key: context.idempotency_key,
@@ -426,7 +427,7 @@ module Helio
       Util.log_debug("Dashboard link for request",
                      idempotency_key: context.idempotency_key,
                      request_id: context.request_id,
-                     url: Util.request_id_dashboard_url(context.request_id, context.api_key))
+                     url: Util.request_id_dashboard_url(context.request_id, context.api_token))
     end
     private :log_response
 
@@ -445,7 +446,7 @@ module Helio
     # don't have to pass around as many parameters.
     class RequestLogContext
       attr_accessor :body
-      attr_accessor :account
+      attr_accessor :api_id
       attr_accessor :api_token
       attr_accessor :api_version
       attr_accessor :idempotency_key
@@ -473,7 +474,7 @@ module Helio
                   end
 
         context = dup
-        context.account = headers["Helio-Account"]
+        context.api_id = headers["X-API-ID"]
         context.api_version = headers["Helio-Version"]
         context.idempotency_key = headers["Idempotency-Key"]
         context.request_id = headers["Request-Id"]

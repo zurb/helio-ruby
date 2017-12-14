@@ -9,14 +9,14 @@ module Helio
           opts[:client] ||= HelioClient.active_client
 
           headers = opts.clone
-          api_key = headers.delete(:api_key)
+          api_token = headers.delete(:api_token)
           api_base = headers.delete(:api_base)
           client = headers.delete(:client)
           # Assume all remaining opts must be headers
 
-          resp, opts[:api_key] = client.execute_request(
+          resp, opts[:api_token] = client.execute_request(
             method, url,
-            api_base: api_base, api_key: api_key,
+            api_base: api_base, api_token: api_token,
             headers: headers, params: params
           )
 

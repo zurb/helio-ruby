@@ -31,12 +31,12 @@ gem 'helio'
 ## Usage
 
 The library needs to be configured with your account's secret key which is
-available in your [Helio Dashboard][api-keys]. Set `Helio.api_key` to its
+available in your [Helio Dashboard][api-keys]. Set `Helio.api_token` to its
 value:
 
 ``` ruby
 require "helio"
-Helio.api_key = "..."
+Helio.api_token = "..."
 
 # list charges
 Helio::Participant.list()
@@ -56,14 +56,14 @@ require "helio"
 
 Helio::Participant.list(
   {},
-  :api_key => "sk_test_...",
-  :helio_account => "acct_..."
+  :api_token => "sk_test_...",
+  :api_id => "acct_..."
 )
 
 Helio::Participant.retrieve(
   "id",
-  :api_key => "token...",
-  :helio_account => "acct_..."
+  :api_token => "token...",
+  :api_id => "acct_..."
 )
 ```
 
