@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = "Discover design insights with surveys and tests. See https://zurb.com/helio for details."
   s.author = "Helio"
   s.email = "helio@zurb.com"
-  s.homepage = "https://zurb.com"
+  s.homepage = "https://github.com/zurb/helio-ruby"
   s.license = "MIT"
 
   s.add_dependency("faraday", "~> 0.10")
