@@ -39,6 +39,7 @@ value:
 
 ``` ruby
 require "helio"
+Helio.api_id = "..."
 Helio.api_token = "..."
 
 # list participants
@@ -59,14 +60,14 @@ require "helio"
 
 Helio::Participant.list(
   {},
-  :api_token => "sk_test_...",
-  :api_id => "acct_..."
+  :api_token => "...",
+  :api_id => "..."
 )
 
 Helio::Participant.retrieve(
   "id",
-  :api_token => "token...",
-  :api_id => "acct_..."
+  :api_token => "...",
+  :api_id => "..."
 )
 ```
 
