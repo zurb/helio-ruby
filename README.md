@@ -1,5 +1,8 @@
 # Helio Ruby Library
 
+### THIS GEM IS NOT PRODUCTION READY
+The first production release will be version 1.0.0. Until then, consider this gem unstable as the Helio API is in flux.
+
 ## Installation
 
 You don't need this source code unless you want to modify the gem. If you just
