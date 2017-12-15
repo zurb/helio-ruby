@@ -374,6 +374,7 @@ module Helio
         headers["Idempotency-Key"] ||= SecureRandom.uuid
       end
 
+      headers["X-API-ID"] = Helio.api_id if Helio.api_id
       headers["Helio-Version"] = Helio.api_version if Helio.api_version
       headers["X-API-TOKEN"] = Helio.api_token if Helio.api_token
 

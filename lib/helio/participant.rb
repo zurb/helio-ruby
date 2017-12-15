@@ -5,13 +5,5 @@ module Helio
     extend Helio::APIOperations::List
 
     OBJECT_NAME = "participant".freeze
-
-    def resource_url
-      if self["id"]
-        super
-      else
-        "/v1/participants"
-      end
-    end
   end
 end

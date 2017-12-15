@@ -17,7 +17,8 @@ module Helio
       if self == APIResource
         raise NotImplementedError, "APIResource is an abstract class.  You should perform actions on its subclasses (Charge, Customer, etc.)"
       end
-      "/v1/#{CGI.escape(class_name.downcase)}s"
+      resource_path = class_name.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
+      "/#{CGI.escape(resource_path)}s"
     end
 
     # A metaprogramming call that specifies that a field of a resource can be

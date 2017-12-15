@@ -41,7 +41,7 @@ module Helio
 
   @app_info = nil
 
-  @api_base = "https://helio.zurb.com/api/public"
+  @api_base = "http://api.helio.test/public"
 
   @log_level = nil
   @logger = nil
