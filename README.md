@@ -5,11 +5,11 @@
 You don't need this source code unless you want to modify the gem. If you just
 want to use the package, just run:
 
-    gem install helio
+    gem install helio-ruby
 
 If you want to build the gem from source:
 
-    gem build helio.gemspec
+    gem build helio-ruby.gemspec
 
 ### Requirements
 
@@ -25,7 +25,7 @@ compromised in transit and alter the code of gems fetched securely over https:
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'helio'
+gem 'helio-rubyg'
 ```
 
 ## Usage
