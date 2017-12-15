@@ -25,7 +25,7 @@ compromised in transit and alter the code of gems fetched securely over https:
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'helio-rubyg'
+gem 'helio-ruby'
 ```
 
 ## Usage
