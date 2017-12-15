@@ -38,10 +38,10 @@ value:
 require "helio"
 Helio.api_token = "..."
 
-# list charges
+# list participants
 Helio::Participant.list()
 
-# retrieve single charge
+# retrieve single participant
 Helio::Participant.retrieve(
   "id",
 )
@@ -76,8 +76,8 @@ library use any client supported by [Faraday][faraday] by initializing a
 ``` ruby
 conn = Faraday.new
 client = Helio::HelioClient.new(conn)
-charge, resp = client.request do
-  Helio::participant.retrieve(
+participant, resp = client.request do
+  Helio::Participant.retrieve(
     "id",
   )
 end
