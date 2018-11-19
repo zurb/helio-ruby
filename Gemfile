@@ -4,7 +4,7 @@ gemspec
 
 group :development do
   gem "coveralls", require: false
-  gem "mocha", "~> 0.13.2"
+  gem "mocha", "~> 1.7.0"
   gem "rake"
   gem "shoulda-context"
   gem "test-unit"
