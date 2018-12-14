@@ -68,7 +68,7 @@ module Helio
         data.map { |i| convert_to_helio_object(i, opts) }
       when Hash
         # Try converting to a known object class.  If none available, fall back to generic HelioObject
-        object_classes.fetch(data[:object], HelioObject).construct_from(data, opts)
+        object_classes.fetch(data[:object_type], HelioObject).construct_from(data, opts)
       else
         data
       end
