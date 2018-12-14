@@ -23,5 +23,9 @@ module Helio
       Participant.create(params.merge(customer_list_id: id), opts)
     end
 
+    def participants(params = {}, opts = {})
+      resp, opts = request(:get, resource_url + "/participants", params, Util.normalize_opts(opts))
+      Util.convert_to_helio_object(resp.data, opts)
+    end
   end
 end
