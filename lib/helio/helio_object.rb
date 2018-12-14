@@ -211,7 +211,7 @@ module Helio
       []
     end
 
-    protected
+  protected
 
     def metaclass
       class << self; self; end

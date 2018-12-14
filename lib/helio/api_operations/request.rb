@@ -16,8 +16,6 @@ module Helio
           client = headers.delete(:client)
           # Assume all remaining opts must be headers
 
-          puts "PARAMS: #{params.inspect}"
-
           resp, opts[:api_token] = client.execute_request(
             method, url,
             api_base: api_base, api_token: api_token,
@@ -48,7 +46,7 @@ module Helio
         base.extend(ClassMethods)
       end
 
-      protected
+    protected
 
       def request(method, url, params = {}, opts = {})
         opts = @opts.merge(Util.normalize_opts(opts))

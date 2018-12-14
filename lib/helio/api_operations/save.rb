@@ -73,7 +73,7 @@ module Helio
         base.extend(ClassMethods)
       end
 
-      private
+    private
 
       def save_url
         # This switch essentially allows us "upsert"-like functionality. If the
