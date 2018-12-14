@@ -14,10 +14,6 @@ module Helio
     nested_resource_class_methods :participant,
                                   operations: %i[create retrieve update delete list]
 
-    # class << self
-    #   alias detach_source delete_source
-    # end
-
     def add_participant(params, opts = {})
       opts = @opts.merge(Util.normalize_opts(opts))
       Participant.create(params.merge(customer_list_id: id), opts)
