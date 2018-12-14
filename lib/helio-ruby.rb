@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Helio Ruby bindings
 # API spec at https://helio.zurb.com
 require "cgi"
