@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helio
   # HelioError is the base error from which all other more specific Helio
   # errors derive.

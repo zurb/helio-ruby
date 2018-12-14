@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helio
   class APIResource < HelioObject
     include Helio::APIOperations::Request

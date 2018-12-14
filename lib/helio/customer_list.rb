@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helio
   class CustomerList < APIResource
     extend Helio::APIOperations::Create
@@ -6,7 +8,7 @@ module Helio
     extend Helio::APIOperations::List
     extend Helio::APIOperations::NestedResource
 
-    OBJECT_NAME = "customer_list".freeze
+    OBJECT_NAME = "customer_list"
 
     save_nested_resource :participant
     nested_resource_class_methods :participant,

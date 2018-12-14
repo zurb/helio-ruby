@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "cgi"
 
 module Helio
@@ -8,19 +10,19 @@ module Helio
       :api_token,
       :idempotency_key,
       :helio_version
-    ].freeze
+    ]
 
     # Options that should be copyable from one HelioObject to another
     # including options that may be internal.
     OPTS_COPYABLE = (
       OPTS_USER_SPECIFIED + Set[:api_base]
-    ).freeze
+    )
 
     # Options that should be persisted between API requests. This includes
     # client, which is an object containing an HTTP client to reuse.
     OPTS_PERSISTABLE = (
       OPTS_USER_SPECIFIED + Set[:client] - Set[:idempotency_key]
-    ).freeze
+    )
 
     def self.objects_to_ids(h)
       case h

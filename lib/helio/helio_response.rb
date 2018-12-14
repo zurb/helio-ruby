@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helio
   # HelioResponse encapsulates some vitals of a response that came back from
   # the Helio API.
