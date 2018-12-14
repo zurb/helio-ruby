@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version = Helio::VERSION
   s.required_ruby_version = '>= 2.0.0'
   s.summary = 'Ruby bindings for the Helio API'
-  s.description = 'Discover design insights with surveys and tests. See https://zurb.com/helio for details.'
+  s.description = 'Discover design insights with surveys and tests. See https://helio.app for details.'
   s.author = 'Helio'
-  s.email = 'helio@zurb.com'
+  s.email = 'help@helio.app'
   s.homepage = 'https://github.com/zurb/helio-ruby'
   s.license = 'MIT'
 
