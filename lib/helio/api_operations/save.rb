@@ -55,11 +55,17 @@ module Helio
 
         values = serialize_params(self).merge(params)
 
+        request_method = if self['id']
+          :put
+        else
+          :post
+        end
+
         # note that id gets removed here our call to #url above has already
         # generated a uri for this object with an identifier baked in
         values.delete(:id)
 
-        resp, opts = request(:post, save_url, values, opts)
+        resp, opts = request(request_method, save_url, values, opts)
         initialize_from(resp.data, opts)
       end
 

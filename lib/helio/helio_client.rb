@@ -277,6 +277,7 @@ module Helio
     end
 
     def specific_api_error(resp, error_data, context)
+      puts "helio error data: #{error_data.inspect}"
       Util.log_error("Helio API error",
                      status: resp.http_status,
                      error_code: error_data[:code],

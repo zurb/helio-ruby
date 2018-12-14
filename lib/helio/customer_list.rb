@@ -20,7 +20,7 @@ module Helio
 
     def add_participant(params, opts = {})
       opts = @opts.merge(Util.normalize_opts(opts))
-      Participant.create(params.merge(participant: id), opts)
+      Participant.create(params.merge(customer_list_id: id), opts)
     end
 
   end
