@@ -43,7 +43,7 @@ module Helio
 
   @app_info = nil
 
-  @api_base = "http://api.helio.test/public"
+  @api_base = "https://my.helio.app/api/public"
 
   @log_level = nil
   @logger = nil
