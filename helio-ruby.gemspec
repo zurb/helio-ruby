@@ -5,7 +5,7 @@ require 'helio/version'
 Gem::Specification.new do |s|
   s.name = 'helio-ruby'
   s.version = Helio::VERSION
-  s.required_ruby_version = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.2.2'
   s.summary = 'Ruby bindings for the Helio API'
   s.description = 'Discover design insights with surveys and tests. See https://helio.app for details.'
   s.author = 'Helio'
